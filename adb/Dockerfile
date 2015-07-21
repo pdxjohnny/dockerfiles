@@ -33,10 +33,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get -y purge wget unzip openjdk-7-jre-headless && \
     apt-get -y autoremove && \
     apt-get clean && \
-    rm -rf /usr/share/perl && \
-    rm -rf /usr/share/man && \
     rm -rf /usr/share/locale && \
-    rm -rf /usr/share/doc && \
     rm -rf /var/cache/apt/*
 
 # Expose default adb port
@@ -44,4 +41,3 @@ EXPOSE 5037
 
 # Set up PATH for adb
 ENV PATH $PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools
-
