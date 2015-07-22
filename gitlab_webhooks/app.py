@@ -63,6 +63,20 @@ def start(port=PORT, address=ADDRESS):
     server = ThreadedHTTPServer((address, port), Handler)
     server.serve_forever()
 
+def make_daemon():
+    # Daemonize to run in background
+    pid = os.fork()
+    if pid > 0:
+        # exit first parent
+        sys.exit(0)
+    pid = os.fork()
+    if pid > 0:
+        # exit second parent
+        sys.exit(0)
+    output = open("/dev/null", 'wb')
+    sys.stdout = output
+    sys.stderr = output
+
 def main():
     """
     Starts the webserver, first argument is port number, default is 9898
@@ -70,6 +84,8 @@ def main():
     port = PORT
     if len(sys.argv) > 1:
         port = sys.argv[1]
+    if "-D" in sys.argv:
+        make_daemon()
     start(port)
 
 if __name__ == '__main__':
