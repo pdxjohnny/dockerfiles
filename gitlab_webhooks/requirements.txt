@@ -1,2 +1,3 @@
 docker-py
 gitpython
+irc

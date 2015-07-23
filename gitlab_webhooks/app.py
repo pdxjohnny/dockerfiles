@@ -7,7 +7,7 @@ Description: A webserver to receive json web hooks from gitlab_webhooks
     hook.py is called and passed the hook data.
 
 Crontab line to run on reboot
-@reboot /usr/bin/python /path/to/gitlab_webhooks/app.py 9898 -D
+@reboot /usr/bin/python /path/to/gitlab_webhooks/app.py 9898
 """
 import os
 import sys
@@ -85,7 +85,7 @@ def main():
     port = PORT
     if len(sys.argv) > 1:
         port = int(sys.argv[1])
-    if "-D" in sys.argv:
+    if not "-D" in sys.argv:
         make_daemon()
     start(port)
 

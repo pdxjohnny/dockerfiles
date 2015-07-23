@@ -8,5 +8,7 @@ currently builds the the Docker image and pushes them to the registry
 specified or the public registry.
 
 ```bash
-python app.py 9898
+python app.py 9898 -D
 ```
+
+For daemon no -D
