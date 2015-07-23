@@ -7,6 +7,8 @@ import itertools
 
 import irc.client
 
+MAX_LENGTH = 204
+"Longest a message can be"
 __connection__ = False
 "The conenction to the irc server"
 __target__ = None
@@ -14,7 +16,13 @@ __target__ = None
 
 def write(message):
     if __connection__ is not False:
-        __connection__.privmsg(__target__, message)
+        message = [message[i:i + MAX_LENGTH] \
+            for i in range(0, len(message), MAX_LENGTH)]
+        for section in message:
+            try:
+                __connection__.privmsg(__target__, section)
+            except Exception as error:
+                print(error)
         return True
     return False
 
