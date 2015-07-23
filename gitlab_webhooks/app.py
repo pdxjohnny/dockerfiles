@@ -87,6 +87,7 @@ def main():
         port = int(sys.argv[1])
     if not "-D" in sys.argv:
         make_daemon()
+    hooks.init()
     start(port)
 
 if __name__ == '__main__':

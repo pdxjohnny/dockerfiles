@@ -20,12 +20,16 @@ DOCKER_USERNAME = "pdxjohnny"
 # True if your registry is insecure
 INSECURE_REGISTRY = True
 # Send output to irc, False or call irc_client.start
-IRC = irc_client.start({
+IRC = {
     "host": "irc.freenode.net",
     "port": 6697,
     "nickname": "dockerbuildbot",
     "target": "#docker"
-})
+}
+
+def init():
+    if IRC:
+        irc_client.start(IRC)
 
 def git_fetch(repo):
     """
@@ -88,7 +92,7 @@ def print_stream(stream):
 def write(message):
     if not '\r' in message and message[-1] != '\n':
         message += '\n'
-    if IRC:
+    if IRC is not False:
         irc_client.write(message.rstrip())
     sys.stdout.write(message)
 
