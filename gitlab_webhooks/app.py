@@ -13,6 +13,7 @@ import os
 import sys
 import json
 import thread
+import sillystream
 from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
 from SocketServer import ThreadingMixIn
 
@@ -20,6 +21,7 @@ import hooks
 
 PORT = 9898
 ADDRESS = "0.0.0.0"
+STREAM = True
 
 class Handler(BaseHTTPRequestHandler):
     """
@@ -74,7 +76,13 @@ def make_daemon():
     if pid > 0:
         # exit second parent
         sys.exit(0)
-    output = open("/dev/null", 'wb')
+    if STREAM:
+        # Create sillystream server
+        output = sillystream.server()
+        # Start the server
+        output.start_thread()
+    else:
+        output = open("/dev/null", 'wb')
     sys.stdout = output
     sys.stderr = output
 

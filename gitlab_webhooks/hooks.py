@@ -20,12 +20,7 @@ DOCKER_USERNAME = "pdxjohnny"
 # True if your registry is insecure
 INSECURE_REGISTRY = True
 # Send output to irc, False or call irc_client.start
-IRC = {
-    "host": "irc.freenode.net",
-    "port": 6697,
-    "nickname": "dockerbuildbot",
-    "target": "#docker"
-}
+IRC = False
 
 def init():
     if IRC:
