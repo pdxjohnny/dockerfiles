@@ -80,7 +80,7 @@ def arg_setup():
     initial = vars(arg_parser.parse_args())
     args = {}
     for arg in initial:
-        if initial[arg]:
+        if initial[arg] is not None:
             args[arg] = initial[arg]
     return args
 
@@ -92,7 +92,7 @@ def main():
     # Work in background
     if args["daemon"]:
         make_daemon()
-    # Client connect doesn't taek this argument
+    # Client connect doesn't take this argument
     del args["daemon"]
     # Create the client
     test = on_recv()
