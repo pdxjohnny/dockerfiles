@@ -37,7 +37,7 @@ def git_fetch(repo):
     else:
         write("Pulling...")
         bare_repo = git.Repo(repo["bare"])
-        bare_repo.remotes.origin.fetch("master")
+        bare_repo.remotes.origin.fetch("master:master")
         write("Pulled")
 
 def git_checkout(repo):
