@@ -45,38 +45,6 @@ class on_recv(sillystream.client):
 
     def build_finished(self, message):
         self.notify(message, "Docker Build Finished")
-        # Pull the new image and restart the nodes
-        restart_and_update = [
-            "/usr/bin/python",
-            "/home/john/Documents/distributed-android-testing/docker/docker.py",
-            "stop",
-            "rm",
-            "pull",
-            "start"
-        ]
-        # Restart the manager
-        restart_manager = [
-            ["docker", "stop", "dat-manager"],
-            ["docker", "rm", "dat-manager"],
-            ["docker", "run", "-d", "--name", "dat-manager", "--privileged", "--net=host", "raat.jf.intel.com:5000/pdxjohnny/distributed-android-testing", "/bin/dat-manager"]
-        ]
-        # Pull new before restarting manager
-        pull_new = [
-            "docker",
-            "pull",
-            "raat.jf.intel.com:5000/pdxjohnny/distributed-android-testing"
-        ]
-        try:
-            subprocess.check_output(pull_new)
-            for command in restart_manager:
-                try:
-                    subprocess.check_output(command)
-                except:
-                    pass
-            subprocess.check_output(restart_and_update)
-            self.notify("Nodes were updated and restarted", "DAT Nodes Redeployed")
-        except Exception as error:
-            self.notify("Failed to update and restart nodes {}".format(str(error)), "DAT Nodes Failed")
 
 def make_daemon():
     """
