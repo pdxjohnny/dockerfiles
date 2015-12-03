@@ -1,4 +1,5 @@
 *.pyc
+*.log
 
 gitlab_webhooks/builds
 gitlab_webhooks/repos
