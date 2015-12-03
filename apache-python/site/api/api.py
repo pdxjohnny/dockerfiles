@@ -23,5 +23,7 @@ try:
     post = json.loads(post)
 except Exception as e:
     sendResponse(STATUS_ERROR, {'Error': str(e)})
+    sys.exit(0)
 
 sendResponse(STATUS_OK, post)
+sys.exit(0)
