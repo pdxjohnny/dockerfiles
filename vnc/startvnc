@@ -1,0 +1,9 @@
+#!/bin/bash
+PATH="$PATH:/usr/bin/"
+DISPLAY="1"
+DEPTH="16"
+GEOMETRY="1920x1080"
+OPTIONS="-depth ${DEPTH} -geometry ${GEOMETRY} :${DISPLAY} -interface 0.0.0.0"
+
+echo "Starting vncserver for user '${USER}' on 0.0.0.0:${DISPLAY}"
+/usr/bin/vncserver ${OPTIONS}
