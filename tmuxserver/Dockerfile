@@ -14,6 +14,10 @@ RUN apk --no-cache add \
     git clone https://github.com/zolrath/wemux.git /usr/local/share/wemux && \
     mkdir -p /usr/local/bin /usr/local/etc && \
     ln -s /usr/local/share/wemux/wemux /usr/local/bin/wemux && \
-    cp /usr/local/share/wemux/wemux.conf.example /usr/local/etc/wemux.conf
+    cp /usr/local/share/wemux/wemux.conf.example /usr/local/etc/wemux.conf && \
+    adduser -S -s /bin/bash wemux && \
+    sed -i "s/.*host_list=.*/host_list=(wemux)/g" /usr/local/etc/wemux.conf
 
-CMD ["/usr/sbin/sshd", "-D"]
+COPY startup.sh /bin/init.d/startup.sh
+
+ENTRYPOINT ["/bin/init.d/startup.sh"]
