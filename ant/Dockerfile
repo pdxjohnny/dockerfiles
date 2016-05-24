@@ -10,6 +10,6 @@ RUN set -x && \
     apk --no-cache add \
         openjdk8="$JAVA_ALPINE_VERSION" \
         apache-ant \
-        bash && \
+        bash
 
 ENTRYPOINT ["ant"]
