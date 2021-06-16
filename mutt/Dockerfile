@@ -6,6 +6,8 @@ FROM ubuntu:16.04 as mutt
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
   apt-get install -y \
+    lynx \
+    vim \
     mutt \
     krb5-user \
     ca-certificates && \
